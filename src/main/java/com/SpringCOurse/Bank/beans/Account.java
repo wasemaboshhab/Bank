@@ -24,6 +24,9 @@ public class Account {
     private boolean delay;
     @Column(name = "limited")
     private boolean limited;
+    @ManyToOne()
+    @JoinColumn(name = "client_id")
+    private Client client;
     // loans should be entity account have many loans - loan could  belong to one account
 
 

@@ -2,8 +2,13 @@ package com.SpringCOurse.Bank.beans;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Entity
+@Data
 @Table(name = "clients")
 public class Client {
     @Id
@@ -15,8 +20,8 @@ public class Client {
     private String token;
     @Column(name = "email")
     private String email;
-
-    // will add account latter
+    @OneToMany(mappedBy = "client")
+    private List<Account> accounts;
 
 
 }
