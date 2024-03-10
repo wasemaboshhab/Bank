@@ -2,13 +2,15 @@ package com.SpringCOurse.Bank.beans;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.stereotype.Component;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "clients")
 public class Client {
     @Id
@@ -20,7 +22,8 @@ public class Client {
     private String token;
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client" ,fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<Account> accounts;
 
 
