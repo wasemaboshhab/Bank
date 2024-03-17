@@ -5,6 +5,7 @@ import com.SpringCOurse.Bank.daos.ClientDAO;
 import com.SpringCOurse.Bank.exceptions.AccountNotFound;
 import com.SpringCOurse.Bank.exceptions.ClientAlreadyExist;
 import com.SpringCOurse.Bank.exceptions.ClientNotFound;
+import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,30 @@ public class ClientService {
             throw new ClientNotFound("client with id : " + id + "not found");
         }
         return clientOptional.get();
+    }
+
+    public void removeClient(int clientId) throws ClientNotFound {
+        Client client = findClientById(clientId);
+        //check if the client have more the one account
+            // 1.1-  go to account service find all the accounts by clientId
+                // 1.2 - check if the account have loans
+                    // 1.3 -remove all the loans . then go back to remove account and finally remove the client
+    }
+
+    @Transactional
+    public void updateUsername(int clientId , String username) {
+
+    }
+
+
+    @Transactional
+    public void updateEmail(int clientId, String email) {
+
+    }
+
+    @Transactional
+    public void updateUserNameAndEmail(int clientId,String username,String email){
+        //call the  two above methods
     }
 
 

@@ -2,8 +2,10 @@ package com.SpringCOurse.Bank;
 
 import com.SpringCOurse.Bank.beans.Account;
 import com.SpringCOurse.Bank.beans.Client;
+import com.SpringCOurse.Bank.beans.Loan;
 import com.SpringCOurse.Bank.services.AccountService;
 import com.SpringCOurse.Bank.services.ClientService;
+import com.SpringCOurse.Bank.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +22,9 @@ public class BankApplication implements CommandLineRunner {
 	private ClientService clientService;
 	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	private LoanService loanService;
 
 	public static void main(String[] args)  {
 		 SpringApplication.run(BankApplication.class, args);
@@ -63,9 +68,17 @@ public class BankApplication implements CommandLineRunner {
 
 		this.clientService.associatingAccountWithClient(account1.getId(), client1.getId());
 
+		Loan loan1 = Loan.builder()
+				.monthsOfLoans(2)
+				.amount(1000.)
+				.interestRate(5.8)
+				.monthlyRepayment(5002.8)
+				.build();
+		loanService.addLoan(loan1);
 
-		Client client = this.clientService.findClientById(1);
-		System.out.println(client);
+		this.accountService.associatingLoanWithAccount(account1.getId(), loan1.getId());
+
+
 
 
 	}

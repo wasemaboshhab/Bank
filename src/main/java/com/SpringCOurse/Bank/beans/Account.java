@@ -1,11 +1,8 @@
 package com.SpringCOurse.Bank.beans;
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Array;
+import lombok.*;
+
 
 import java.util.List;
 
@@ -14,19 +11,19 @@ import java.util.List;
 @Table(name = "accounts")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Account {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "account")
+    private Integer accountNumber;
     @Column(name = "bank")
     private Integer bankNumber;
     @Column(name = "branch")
     private Integer branchNumber;
-    @Column(name = "account")
-    private Integer accountNumber;
     @Column(name = "balance")
     private Integer balance;
     @Column(name = "delay")
@@ -37,8 +34,10 @@ public class Account {
     @JoinColumn(name = "client_id")
     private Client client;
     @OneToMany(mappedBy = "account")
+    @ToString.Exclude
+    @JsonIgnore
     private List<Loan> loans;
-    // loans should be entity account have many loans - loan could  belong to one account
+
 
 
 }

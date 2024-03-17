@@ -1,6 +1,7 @@
 package com.SpringCOurse.Bank.beans;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Client {
     private String email;
     @OneToMany(mappedBy = "client" ,fetch = FetchType.EAGER)
     @ToString.Exclude
+    @JsonIgnore
     private List<Account> accounts;
 
 
